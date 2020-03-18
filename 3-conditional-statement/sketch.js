@@ -9,17 +9,18 @@ function setup() {
   createCanvas(500, 400);
 
   //make one avatar called me
-  me = new Avatar(width/2, 300, 3);
-
+  me = new Avatar(width/2, 300, 6);
+  earth = ellipse(100,100)
 }
 
 function draw(){
-	background(220);
+	background(0,0,128);
+  earth
 
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 25 == 0) {
+  if (frameCount % 35 == 0) {
       let  b = new Ball(width, random(0,height), -3);
       balls.push(b);
       console.log(balls); //print the balls array to the console
@@ -44,10 +45,10 @@ class Avatar {
 	}
 
 	drawMe(){  // draw the running person
-    		stroke("green");
-        strokeWeight(3);
-    		fill("blue");
-		    ellipse(this.x,this.y,20,20);
+    		stroke("gold");
+        strokeWeight(1);
+    		fill("red");
+		    ellipse(this.x,this.y,40,40);
         line(this.x,this.y, this.x, this.y+40);
         line(this.x, this.y+40, this.x-20, this.y+60);
         line(this.x, this.y+40, this.x+10, this.y+50);
@@ -64,8 +65,13 @@ class Avatar {
     if (keyIsDown(DOWN_ARROW)) { // if you hold the down arrow, move down by speed
         this.y += this.speed;
     }
-	}
-
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.x += this.speed;
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      this.x -= this.speed;
+}
+}
   die(){
 
   }
@@ -86,20 +92,20 @@ class Ball {
 	// draw a ball on the screen at x,y
 	drawBall(){
     	stroke(0);
-      strokeWeight(1);
-    	fill("red");
-		  ellipse(this.x,this.y,10,10);
+      strokeWeight(3);
+    	fill("orange");
+		  ellipse(this.x,this.y,20,20);
 	}
 
 	//update the location of the ball, so it moves across the screen
 	moveBall(){
 		this.x = this.x+ this.speed;
-		this.y = this.y+.5;
+		this.y = this.y+.75;
 	}
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	bounceBall(){
-    		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
+    		if (this.x >= me.x-25 && this.x <= me.x+25 && this.y > me.y-70 && this.y < me.y+70){
       			this.speed = -this.speed;
     		}
   	}
