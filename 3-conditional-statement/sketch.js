@@ -3,7 +3,12 @@ let balls = [];
 
 //create a variable to hold your avatar
 let me;
+let mySound
 
+function preload() {
+  soundFormats('mp3', 'ogg', 'wav');
+  mySound = loadSound('levelup.wav')
+}
 
 function setup() {
   createCanvas(500, 400);
@@ -107,6 +112,7 @@ class Ball {
   	bounceBall(){
     		if (this.x >= me.x-25 && this.x <= me.x+25 && this.y > me.y-70 && this.y < me.y+70){
       			this.speed = -this.speed;
+            mySound.play();
     		}
   	}
 
